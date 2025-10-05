@@ -6,11 +6,12 @@ const createWindow = () => {
         width: 800,
         height: 600,
         webPreferences: {
-        nodeIntegration: true
-    }
+            nodeIntegration: true,
+            contextIsolation: false
+        }
     })
 
-    win.loadFile(path.join(__dirname,'view' ,'index.html'))
+    win.loadFile(path.join(__dirname,'view' ,'login.html'))
 }
 
 app.whenReady().then(() => {
