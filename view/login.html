@@ -21,7 +21,13 @@
         <div class="forgot-password">
         </div>
     </div>
-
+    <script>
+        // Escucha el evento del formulario
+        document.getElementById("loginForm").addEventListener("submit", (e) => {
+            e.preventDefault(); // Evita que se recargue la página
+            window.location.href = "./index.html"; // Redirige al index
+        });
+    </script>
     
 </body>
 </html>
