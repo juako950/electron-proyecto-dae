@@ -24,7 +24,5 @@ app.on('window-all-closed', () => {
 
 const { ipcMain } = require('electron');
 
-ipcMain.on('login-success', (event) => {
-    const win = BrowserWindow.getFocusedWindow();
-    win.loadFile('./view/index.html'); // 👈 Cambia a index.html
-});
+
+
