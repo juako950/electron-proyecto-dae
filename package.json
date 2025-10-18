@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^37.2.5"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.75.1"
   }
 }
