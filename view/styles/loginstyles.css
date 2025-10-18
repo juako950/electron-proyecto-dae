@@ -124,7 +124,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .login-form input[type="email"],
+        .login-form input[type="number"],
         .login-form input[type="password"] {
             width: 100%;
             padding: 1rem;
@@ -139,13 +139,13 @@
             transition: all 0.3s ease;
         }
 
-        .login-form input[type="email"]::placeholder,
+        .login-form input[type="number"]::placeholder,
         .login-form input[type="password"]::placeholder {
             color: rgba(255, 255, 255, 0.7);
             letter-spacing: 0.1em;
         }
 
-        .login-form input[type="email"]:focus,
+        .login-form input[type="number"]:focus,
         .login-form input[type="password"]:focus {
             outline: none;
             border-color: #ffd700;
