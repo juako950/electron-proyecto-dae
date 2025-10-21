@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar Cliente</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .contenedor {
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      background-color: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 15px;
+      padding: 30px;
+      width: 800px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+    }
+
+    .titulo {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .contenido {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .columna-izquierda {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .info {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .columna-derecha {
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .boton {
+      background: #9b59b6;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 120px;
+      align-self: flex-end;
+    }
+
+    .boton:hover {
+      background: #b76df2;
+      transform: scale(1.05);
+    }
+
+    .volver {
+      background: transparent;
+      border: 2px solid #9b59b6;
+      color: #9b59b6;
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 13px;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .volver:hover {
+      background: #9b59b6;
+      color: white;
+    }
+
+    @media (max-width: 750px) {
+      .contenido {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .columna-izquierda, .columna-derecha {
+        width: 90%;
+      }
+
+      .boton {
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <a href="./cliente.html" class="volver"> Atrás</a>
+    <div class="titulo">Modificar Cliente</div>
+
+    <div class="contenido">
+      <div class="columna-izquierda">
+        <select id="listaClientes" size="6">
+          <option value="carlos">Carlos</option>
+          <option value="andres">Andrés</option>
+          <option value="blanca">Blanca</option>
+          <option value="daniel">Daniel</option>
+          <option value="fabiola">Fabiola</option>
+          <option value="gabriela">Gabriela</option>
+        </select>
+
+        <div class="info" id="infoCliente">
+          <strong>Cliente Seleccionado</strong><br>
+          Carlos, 12.987.654-1<br>
+          Número: +56 9 8765 4321
+        </div>
+      </div>
+      <div class="columna-derecha">
+        <input id="nombre" type="text" placeholder="Nombre">
+        <input id="apellido" type="text" placeholder="Apellido">
+        <input id="telefono" type="text" placeholder="Teléfono">
+        <button class="boton">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const clientes = {
+      carlos: { nombre: "Carlos", apellido: "López", rut: "12.987.654-1", telefono: "+56 9 8765 4321" },
+      andres: { nombre: "Andrés", apellido: "Ramírez", rut: "15.334.222-0", telefono: "+56 9 9988 1122" },
+      blanca: { nombre: "Blanca", apellido: "Soto", rut: "18.555.333-7", telefono: "+56 9 6655 1122" },
+      daniel: { nombre: "Daniel", apellido: "Torres", rut: "16.778.999-2", telefono: "+56 9 7788 9900" },
+      fabiola: { nombre: "Fabiola", apellido: "Vega", rut: "17.223.456-9", telefono: "+56 9 4455 6677" },
+      gabriela: { nombre: "Gabriela", apellido: "Muñoz", rut: "19.112.998-1", telefono: "+56 9 5544 7788" }
+    };
+
+    const lista = document.getElementById("listaClientes");
+    const info = document.getElementById("infoCliente");
+
+    lista.addEventListener("change", () => {
+      const id = lista.value;
+      const c = clientes[id];
+      if (c) {
+        info.innerHTML = `
+          <strong>Cliente Seleccionado</strong><br>
+          ${c.nombre} ${c.apellido}, ${c.rut}<br>
+          Número: ${c.telefono}
+        `;
+        document.getElementById("nombre").value = c.nombre;
+        document.getElementById("apellido").value = c.apellido;
+        document.getElementById("telefono").value = c.telefono;
+      }
+    });
+
+    lista.dispatchEvent(new Event("change"));
+  </script>
+</body>
+</html>
+

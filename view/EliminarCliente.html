@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar Cliente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      background-size: cover;
+      font-family: 'Roboto', sans-serif;
+      color: rgb(243, 242, 242);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 850px;
+      background-color: #000;
+      padding: 40px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(128, 0, 255, 0.4);
+    }
+
+    .left {
+      width: 50%;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 30px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      color: #ff6666;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background-color: #222;
+      color: rgb(255, 255, 255);
+      outline: none;
+    }
+
+    .info-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      width: 80%;
+      font-size: 15px;
+    }
+
+    .right {
+      width: 40%;
+      text-align: center;
+    }
+
+    .right img {
+      width: 180px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #8b3dff;
+      border: none;
+      color: white;
+      padding: 12px 40px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #a56bff;
+    }
+
+     .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
+      color: white;
+      border: 2px solid #8b3dff;
+      padding: 6px 15px;
+      border-radius: 15px;
+      font-size: 14px;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      transition: 0.3s;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="./cliente.html" class="back-btn">⬅ Atrás</a>
+    <div class="left">
+      <h1>Eliminar Cliente</h1>
+      <p>Debe seleccionar Clientes que no tengan Membresías Activas</p>
+
+      <label for="clienteSelect">Seleccione cliente a eliminar:</label><br>
+      <select id="clienteSelect">
+        <option value="" disabled selected>Seleccionar...</option>
+        <option value="Andrés">Andrés</option>
+        <option value="Blanca">Blanca</option>
+        <option value="Carlos">Carlos</option>
+        <option value="Daniel">Daniel</option>
+        <option value="Ernesto">Ernesto</option>
+        <option value="Fabiola">Fabiola</option>
+        <option value="Gabriela">Gabriela</option>
+      </select>
+
+      <div class="info-box" id="infoBox">
+        <strong>Cliente Seleccionado:</strong><br>
+        Ninguno
+      </div>
+    </div>
+
+    <div class="right">
+      <img src="https://st3.depositphotos.com/1001552/32960/i/450/depositphotos_329606080-stock-photo-asain-sad-bodybuilder.jpg" alt="cliente triste">
+      <br>
+      <button id="eliminarBtn">Eliminar</button>
+    </div>
+  </div>
+
+  <script>
+    const clientes = {
+      "Andrés": { rut: "12345678-9", membresia: "Inactiva" },
+      "Blanca": { rut: "98765432-1", membresia: "Activa" },
+      "Carlos": { rut: "11222333-4", membresia: "Inactiva" },
+      "Daniel": { rut: "33444555-6", membresia: "Inactiva" },
+      "Ernesto": { rut: "99887766-5", membresia: "Activa" },
+      "Fabiola": { rut: "22334455-7", membresia: "Inactiva" },
+      "Gabriela": { rut: "66778899-0", membresia: "Inactiva" }
+    };
+
+    const select = document.getElementById("clienteSelect");
+    const infoBox = document.getElementById("infoBox");
+
+    select.addEventListener("change", () => {
+      const nombre = select.value;
+      const c = clientes[nombre];
+      infoBox.innerHTML = `
+        <strong>Cliente Seleccionado:</strong><br>
+        Nombre: ${nombre}<br>
+        Rut: ${c.rut}<br>
+        Membresía: <span style="color:${c.membresia === 'Activa' ? 'red' : 'lightgreen'};">${c.membresia}</span>
+      `;
+    });
+
+    document.getElementById("eliminarBtn").addEventListener("click", () => {
+      const nombre = select.value;
+      if (!nombre) {
+        alert(" Selecciona un cliente primero.");
+        return;
+      }
+
+      const c = clientes[nombre];
+      if (c.membresia === "Activa") {
+        alert(` No se puede eliminar a ${nombre}, tiene una membresía activa.`);
+      } else {
+        alert(` Cliente ${nombre} eliminado correctamente.`);
+        select.value = "";
+        infoBox.innerHTML = `<strong>Cliente Seleccionado:</strong><br>Ninguno`;
+      }
+    });
+  </script>
+</body>
+</html>
+
